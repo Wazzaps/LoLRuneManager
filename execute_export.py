@@ -12,7 +12,7 @@ def execute(isinchampselect):
     window = app.window(title="League of Legends")
     window.set_focus()
     winpos = window.element_info.rectangle
-    print(winpos.top, winpos.left)
+    print(winpos.top, winpos.left, winpos.width(), winpos.height())
 
     # Capture screen and convert to CV mat
     screen = pyautogui.screenshot()
@@ -21,7 +21,7 @@ def execute(isinchampselect):
 
 
 
-    cv2.imshow('test', open_cv_image)
-    cv2.waitKey()
+    #cv2.imshow('test', open_cv_image)
+    #cv2.waitKey()
 
 

@@ -1,7 +1,7 @@
 import sys
 from cx_Freeze import setup, Executable
 
-opts = {"packages": ["os", "codecs"], "excludes": ["tkinter"], "include_files": ["editbtn.png"]}
+opts = {"packages": ["os", "codecs"], "excludes": ["tkinter"], "include_files": ["editbtn.png", "editbtn_large.png"]}
 
 setup(
     name = "Roons",
