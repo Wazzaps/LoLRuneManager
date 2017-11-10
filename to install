@@ -1,0 +1,10 @@
+both:
+=====
+pyautogui
+pywinauto
+cx-freeze
+
+exporter:
+=========
+numpy
+opencv-python
