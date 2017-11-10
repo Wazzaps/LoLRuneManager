@@ -1,31 +1,12 @@
 import pywinauto
 import pyautogui
-import time
 
 
-def execute(isinchampselect, page):
+def execute(page):
     # Bring window to front
     app = pywinauto.Application().connect(title_re="League of Legends", class_name="RCLIENT")
     window = app.window(title="League of Legends")
     window.set_focus()
-    winpos = window.element_info.rectangle
-
-    if isinchampselect:
-        # Find "Edit page button"
-        pyautogui.PAUSE = 0.05
-        editpageX, editpageY, _, _ = pyautogui.locateOnScreen('editpagebtn.png')
-        pyautogui.moveTo(editpageX + 100, editpageY)
-        pyautogui.click()
-        time.sleep(0.1)
-
-        # Locate marker
-        pyautogui.moveTo(editpageX + 100, editpageY - 210)
-        pyautogui.click()
-
-        # Click "Edit page button"
-        pyautogui.moveTo(editpageX, editpageY)
-        pyautogui.click()
-        time.sleep(0.2)
     
     # Locate reference point
     refX, refY, _, _ = pyautogui.locateOnScreen('editbtn.png')

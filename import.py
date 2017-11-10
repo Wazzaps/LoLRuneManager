@@ -97,11 +97,11 @@ try:
     clipboard = win32clipboard.GetClipboardData().strip().split('\r\n\r\n')
     win32clipboard.CloseClipboard()
     clipboard = list(filter(None, clipboard))
-    if clipboard[0] == '# RUNE FILE':
+    if clipboard[0] == '# RUNE PAGE FILE':
         print('Importing rune page from file...')
         page[0] = clipboard[1]
         page[1:] = [int(x) for x in clipboard[2].split(',')]
-        execute(False, page)
+        execute(page)
     else:
         if len(clipboard) is 8:
             title = 'UNTITLED'
@@ -128,9 +128,9 @@ try:
             if table[c][0] is -1 and state is 1 and page[1] < table[c][1]:
                 page[state * 5 + 2 + table[c][0]] -= 1
             print('- ' + c)
-        execute(len(sys.argv) > 1 and sys.argv[1] == "champselect", page)
+        execute(page)
         print('')
-        print('# RUNES FILE\r\n')
+        print('# RUNE PAGE FILE\r\n')
         print(page[0] + '\r\n')
         print(','.join([str(s) for s in page[1:]]))
 
