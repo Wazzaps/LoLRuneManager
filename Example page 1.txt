@@ -1,0 +1,27 @@
+CAN’T MILK THOSE
+ENGAGE AND TEAMFIGHT POWER WITH ITEM ACTIVES.
+
+
+RESOLVE
+Durability and crowd control
+
+AFTERSHOCK
+After immobilizing an enemy champion gain defenses and later deal a burst of adaptive damage around you.
+
+FONT OF LIFE
+Impairing the movement of an enemy champion marks them. Your allies heal when attacking champion's you've marked.
+
+IRON SKIN
+Gain 5 Armor. Whenever you heal for at least 20 health or from a consumable's effect, increase your Armor by 5% for 3 seconds.
+
+REVITALIZE
+Heals and shields are 5% stronger and increased by an additional 10% on targets below 40% health.
+
+DOMINATION
++130 Health
+
+ZOMBIE WARD
+After killing an enemy ward, a friendly Zombie Ward is raised in its place.
+
+INGENIOUS HUNTER
+Unique takedowns grant permanent Active Item CDR (includes Trinkets).

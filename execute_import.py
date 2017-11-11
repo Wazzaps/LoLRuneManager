@@ -1,6 +1,8 @@
 import pywinauto
 import pyautogui
 
+button = 'left'
+
 
 def execute(page):
     # Bring window to front and calculate size
@@ -21,9 +23,9 @@ def execute(page):
     
     # Change name
     pyautogui.moveTo(refX, refY)
-    pyautogui.click()
+    pyautogui.click(button=button)
     pyautogui.moveTo(refX + ratio * 100, refY)
-    pyautogui.click()
+    pyautogui.click(button=button)
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.typewrite(page[0], interval=0.005)
     
@@ -31,43 +33,43 @@ def execute(page):
     
     # Primary path
     pyautogui.moveTo(refX + ratio * (90 + 38 * (page[1] - 1)), refY + ratio * 90)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Keystone
     pyautogui.moveTo(refX + ratio * (90 + 70 * (page[2] - 1)), refY + ratio * 200)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Primary R1
     pyautogui.moveTo(refX + ratio * (90 + 70 * (page[3] - 1)), refY + ratio * 300)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Primary R2
     pyautogui.moveTo(refX + ratio * (90 + 70 * (page[4] - 1)), refY + ratio * 400)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Primary R3
     pyautogui.moveTo(refX + ratio * (90 + 70 * (page[5] - 1)), refY + ratio * 500)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Secondary path
     pyautogui.moveTo(refX + ratio * (420 + 50 * (page[6] - 1)), refY + ratio * 90)
-    pyautogui.click()
+    pyautogui.click(button=button)
     
     # Secondary R1
     if page[7] is not 0:
         pyautogui.moveTo(refX + ratio * (420 + 70 * (page[7] - 1)), refY + ratio * 170, duration=0.2)
-        pyautogui.click()
+        pyautogui.click(button=button)
     
     # Secondary R2
     if page[8] is not 0:
         pyautogui.moveTo(refX + ratio * (420 + 70 * (page[8] - 1)), refY + ratio * 270)
-        pyautogui.click()
+        pyautogui.click(button=button)
     
     # Secondary R3
     if page[9] is not 0:
         pyautogui.moveTo(refX + ratio * (420 + 70 * (page[9] - 1)), refY + ratio * 330)
-        pyautogui.click()
+        pyautogui.click(button=button)
     
     # Save
     pyautogui.moveTo(refX + ratio * 380, refY)
-    pyautogui.click()
+    pyautogui.click(button=button)
