@@ -3,6 +3,9 @@ import pyautogui
 import numpy as np
 import os
 import subprocess
+
+import time
+
 from cvpipeline import *
 
 
@@ -12,6 +15,7 @@ def execute(isinchampselect):
     window = app.window(title="League of Legends")
     window.set_focus()
     winpos = window.element_info.rectangle
+    time.sleep(0.5)
 
     # Get resources
     pathmask = cv2.imread("pathmask.png", cv2.IMREAD_GRAYSCALE)
@@ -26,6 +30,9 @@ def execute(isinchampselect):
     # Process image
     pipeline = CVPipeline()
     pipeline.process(open_cv_image, pathmask, runemask)
+    cv2.imshow("path", pipeline.cv_dilate_0_output)
+    cv2.imshow("runes", pipeline.cv_dilate_1_output)
+    cv2.waitKey()
     path1 = cv2.boundingRect(pipeline.find_contours_0_output[0])
     path2 = cv2.boundingRect(pipeline.find_contours_0_output[1])
 

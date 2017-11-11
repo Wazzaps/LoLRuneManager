@@ -61,8 +61,8 @@ Source: "C:\Users\David\PycharmProjects\runes\build\exe.win32-3.6\lib\*"; DestDi
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\Rune Importer"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\Rune Exporter"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\Rune Importer"; Filename: "{app}\import.exe"
+Name: "{group}\Rune Exporter"; Filename: "{app}\export.exe"
 
 [Registry]
 Root: HKCR; Subkey: "runeimport"; ValueType: "string"; ValueData: "URL:runeimport Protocol"; Flags: uninsdeletekey
