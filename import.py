@@ -1,3 +1,4 @@
+import urllib.parse
 from execute_import import *
 import win32clipboard
 import sys
@@ -93,21 +94,28 @@ table = {
 }
 
 try:
-    win32clipboard.OpenClipboard()
-    clipboard = win32clipboard.GetClipboardData().strip().split('\r\n\r\n')
-    win32clipboard.CloseClipboard()
-    clipboard = list(filter(None, clipboard))
-    if clipboard[0] == '# RUNE PAGE FILE':
-        print('Importing rune page from file...')
-        page[0] = clipboard[1]
-        page[1:] = [int(x) for x in clipboard[2].split(',')]
+    if len(sys.argv) > 1:
+        inp = ' '.join(sys.argv[1:])
+    else:
+        win32clipboard.OpenClipboard()
+        inp = win32clipboard.GetClipboardData()
+        win32clipboard.CloseClipboard()
+
+    inp = list(filter(None, inp.strip().split('\r\n\r\n')))
+    if len(inp) is 1:
+        print('Importing compacted rune page')
+        if inp[0][:11] == 'runeimport:':
+            inp[0] = urllib.parse.unquote(inp[0][11:])
+        inp = inp[0].split('::')
+        page[0] = inp[0]
+        page[1:] = [int(x) for x in inp[1].split(',')]
         execute(page)
     else:
-        if len(clipboard) is 8:
+        if len(inp) is 8:
             title = 'UNTITLED'
-        elif len(clipboard) is 9:
-            title = clipboard[0].strip().split('\r\n')[0]
-            clipboard.pop(0)
+        elif len(inp) is 9:
+            title = inp[0].strip().split('\r\n')[0]
+            inp.pop(0)
         else:
             raise SyntaxError('Invalid input')
 
@@ -116,7 +124,7 @@ try:
         print(title + ':')
 
         state = -1
-        for c in clipboard:
+        for c in inp:
             c = c.strip().split('\r\n')[0]
             if table[c][0] is -1:
                 state += 1
@@ -129,10 +137,7 @@ try:
                 page[state * 5 + 2 + table[c][0]] -= 1
             print('- ' + c)
         execute(page)
-        print('')
-        print('# RUNE PAGE FILE\r\n')
-        print(page[0] + '\r\n')
-        print(','.join([str(s) for s in page[1:]]))
+        print(page[0] + '::' + ','.join([str(s) for s in page[1:]]))
 
 except:
     raise SyntaxError("Make sure to copy a valid runeforge.gg or probuilds.net page, optionally including the title,\
