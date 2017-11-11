@@ -11,12 +11,25 @@ class CVPipeline:
     def __init__(self):
         """initializes all values to presets or None if need to be set
         """
+        self.__new_size_width = 1280
+        self.__new_size_height = 720
 
+        self.new_size_output = None
+
+
+        self.__cv_resize_dsize = self.new_size_output
+        self.__cv_resize_fx = 1
+        self.__cv_resize_fy = 1
+        self.__cv_resize_interpolation = cv2.INTER_LINEAR
+
+        self.cv_resize_output = None
+
+        self.__mask_0_input = self.cv_resize_output
 
 
         self.mask_0_output = None
 
-
+        self.__mask_1_input = self.cv_resize_output
 
 
         self.mask_1_output = None
@@ -83,13 +96,21 @@ class CVPipeline:
         """
         Runs the pipeline and sets all outputs to new values.
         """
+        # Step New_Size0:
+        (self.new_size_output) = self.__new_size(self.__new_size_width, self.__new_size_height)
+
+        # Step CV_resize0:
+        self.__cv_resize_src = inp
+        self.__cv_resize_dsize = self.new_size_output
+        (self.cv_resize_output) = self.__cv_resize(self.__cv_resize_src, self.__cv_resize_dsize, self.__cv_resize_fx, self.__cv_resize_fy, self.__cv_resize_interpolation)
+
         # Step Mask0:
-        self.__mask_0_input = inp
+        self.__mask_0_input = self.cv_resize_output
         self.__mask_0_mask = pathmask
         (self.mask_0_output) = self.__mask(self.__mask_0_input, self.__mask_0_mask)
 
         # Step Mask1:
-        self.__mask_1_input = inp
+        self.__mask_1_input = self.cv_resize_output
         self.__mask_1_mask = runemask
         (self.mask_1_output) = self.__mask(self.__mask_1_input, self.__mask_1_mask)
 
@@ -121,6 +142,31 @@ class CVPipeline:
         self.__filter_contours_contours = self.find_contours_1_output
         (self.filter_contours_output) = self.__filter_contours(self.__filter_contours_contours, self.__filter_contours_min_area, self.__filter_contours_min_perimeter, self.__filter_contours_min_width, self.__filter_contours_max_width, self.__filter_contours_min_height, self.__filter_contours_max_height, self.__filter_contours_solidity, self.__filter_contours_max_vertices, self.__filter_contours_min_vertices, self.__filter_contours_min_ratio, self.__filter_contours_max_ratio)
 
+
+    @staticmethod
+    def __new_size(width, height):
+        """Fills a size with given width and height.
+		Args:
+            width: A number for the width.
+            height: A number for the height.
+        Returns:
+            A list of two numbers that represent a size.
+        """
+        return (width, height)
+
+    @staticmethod
+    def __cv_resize(src, d_size, fx, fy, interpolation):
+        """Resizes an Image.
+        Args:
+            src: A numpy.ndarray.
+            d_size: Size to set the image.
+            fx: The scale factor for the x.
+            fy: The scale factor for the y.
+            interpolation: Opencv enum for the type of interpolation.
+        Returns:
+            A resized numpy.ndarray.
+        """
+        return cv2.resize(src, d_size, fx=fx, fy=fy, interpolation=interpolation)
 
     @staticmethod
     def __mask(input, mask):
