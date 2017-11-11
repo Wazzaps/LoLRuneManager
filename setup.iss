@@ -25,6 +25,7 @@ DisableProgramGroupPage=yes
 OutputBaseFilename=lolrunemanager_setup
 Compression=lzma
 SolidCompression=yes
+InfoAfterFile=README - instructions.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -60,7 +61,8 @@ Source: "C:\Users\David\PycharmProjects\runes\build\exe.win32-3.6\lib\*"; DestDi
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\Rune Importer"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\Rune Exporter"; Filename: "{app}\{#MyAppExeName}"
 
 [Registry]
 Root: HKCR; Subkey: "runeimport"; ValueType: "string"; ValueData: "URL:runeimport Protocol"; Flags: uninsdeletekey
